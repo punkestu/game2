@@ -1,12 +1,12 @@
 import { Engine } from "./js/engine.js";
 import { Control } from "./js/control.js";
-import { Socket } from "./js/socket.js";
+// import { Socket } from "./js/socket.js";
 import { Obj, Sprite, active, passive, solid } from "./js/object.js";
 
 const game = new Engine({ width: 1024, height: 576 });
 const controller = new Control();
 
-const socket = new Socket("ws://192.168.0.6:8080");
+// const socket = new Socket("ws://192.168.0.6:8080");
 
 function createPlatform({ game, pos = { x: 0, y: 0 }, size = { w: 0, h: 0 } }) {
   game.createObj({
@@ -140,13 +140,13 @@ game.loop = () => {
   game.ctx.fillRect(0, 0, game.canvas.width, game.canvas.height);
   player.update();
 
-  if (
-    controller.key.a.pressed ||
-    controller.key.d.pressed ||
-    controller.key.w.pressed
-  ) {
-    socket.socket.send(JSON.stringify({pos:player.pos}));
-  }
+//   if (
+//     controller.key.a.pressed ||
+//     controller.key.d.pressed ||
+//     controller.key.w.pressed
+//   ) {
+//     socket.socket.send(JSON.stringify({pos:player.pos}));
+//   }
 
   //   if (controller.key.n1.pressed) {
   //     player.switchSprite(karakter[0]);
@@ -162,9 +162,9 @@ game.loop = () => {
   //   }
 };
 
-socket.onopen = () => {
-  console.log("pass");
-};
+// socket.onopen = () => {
+//   console.log("pass");
+// };
 controller.listen();
 
 function run() {
@@ -174,4 +174,4 @@ function run() {
 
 run();
 
-socket.listen();
+// socket.listen();
